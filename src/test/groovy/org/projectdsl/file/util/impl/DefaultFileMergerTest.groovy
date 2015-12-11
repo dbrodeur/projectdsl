@@ -1,6 +1,5 @@
 package org.projectdsl.file.util.impl
 
-import groovy.mock.interceptor.MockFor
 import spock.lang.Specification
 
 class DefaultFileMergerTest extends Specification {
@@ -31,11 +30,11 @@ class DefaultFileMergerTest extends Specification {
 			def merger = new DefaultFileMerger()
 			def scanner = GroovyMock(Scanner)
 			scanner.hasNextLine() >>> [true,true,true,false]
-			scanner.nextLine() >>> ["Hello","My","Friend",null]
+			scanner.nextLine() >>> ["Hello","My","Friend"]
 			def expected = ["Hello","My","Friend"]
 		when:
-			merger.loadAllLines(scanner)
+			result = merger.loadAllLines(scanner)
 		then:
-			1 * merger.loadAllLines(scanner) >> expected
+			result == expected
 	}
 }
